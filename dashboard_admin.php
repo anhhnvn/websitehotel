@@ -1,13 +1,13 @@
 <?php
 session_start();
-// Chỉ cho phép admin truy cập
+// Only allow admin access
 if (!isset($_SESSION['user_id']) || !isset($_SESSION['role']) || $_SESSION['role'] !== 'Admin') {
     header('Location: ../login.php');
     exit();
 }
 ?>
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Admin Dashboard</title>
@@ -15,13 +15,13 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['role']) || $_SESSION['role
 </head>
 <body class="bg-light">
     <div class="container py-5">
-        <h2 class="mb-4">Chào mừng Admin!</h2>
+        <h2 class="mb-4">Welcome Admin!</h2>
         <div class="mb-3">
-            <a href="main.php" class="btn btn-primary">Trang chủ</a>
-            <a href="user.php" class="btn btn-success">Quản lý người dùng</a>
-            <a href="admin_rooms.php" class="btn btn-info">Quản lý phòng</a>
+            <a href="main.php" class="btn btn-primary">Homepage</a>
+            <a href="user.php" class="btn btn-success">User Management</a>
+            <a href="admin_rooms.php" class="btn btn-info">Room Management</a>
         </div>
-        <p>Chọn chức năng bạn muốn quản lý.</p>
+        <p>Select the function you want to manage.</p>
     </div>
 </body>
 </html>

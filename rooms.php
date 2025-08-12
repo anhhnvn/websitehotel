@@ -1,7 +1,7 @@
 <?php
 include "connect.php";
 
-// Kiểm tra nếu là POST → xử lý đặt phòng
+// Check if the request is POST -> process the booking
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $fullname = $_POST['fullname'];
     $email = $_POST['email'];
@@ -18,19 +18,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($stmt) {
         $stmt->bind_param("sssissi", $fullname, $email, $phone, $room_id, $check_in, $check_out, $quantity);
         if ($stmt->execute()) {
-            echo "<script>alert('Đặt phòng thành công!'); window.location.href='rooms.php';</script>";
+            echo "<script>alert('Booking successful!'); window.location.href='rooms.php';</script>";
         } else {
-            echo "Lỗi khi đặt phòng: " . $stmt->error;
+            echo "Error during booking: " . $stmt->error;
         }
     } else {
-        echo "Lỗi truy vấn SQL: " . $conn->error;
+        echo "SQL query error: " . $conn->error;
     }
 } 
-// Nếu là GET → hiển thị form đặt phòng
+// If it's a GET request -> display the booking form
 else if (isset($_GET['room_id'])) {
     $room_id = $_GET['room_id'];
 
-    // Lấy thông tin phòng
+    // Get room information
     $sql = "SELECT * FROM rooms WHERE id = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $room_id);
@@ -39,19 +39,19 @@ else if (isset($_GET['room_id'])) {
     $room = $result->fetch_assoc();
 ?>
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Đặt phòng</title>
+    <title>Book a Room</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
 <div class="container mt-5">
-    <h2 class="mb-4">Đặt phòng: <?php echo htmlspecialchars($room['room_type']); ?></h2>
+    <h2 class="mb-4">Book a Room: <?php echo htmlspecialchars($room['room_type']); ?></h2>
     <form method="POST" action="process_booking.php">
         <input type="hidden" name="room_id" value="<?php echo $room_id; ?>">
         <div class="form-group">
-            <label>Họ và tên:</label>
+            <label>Full Name:</label>
             <input type="text" name="fullname" class="form-control" required>
         </div>
         <div class="form-group">
@@ -59,30 +59,30 @@ else if (isset($_GET['room_id'])) {
             <input type="email" name="email" class="form-control" required>
         </div>
         <div class="form-group">
-            <label>Số điện thoại:</label>
+            <label>Phone Number:</label>
             <input type="text" name="phone" class="form-control" required>
         </div>
         <div class="form-group">
-            <label>Ngày nhận phòng:</label>
+            <label>Check-in Date:</label>
             <input type="date" name="check_in" class="form-control" required>
         </div>
         <div class="form-group">
-            <label>Ngày trả phòng:</label>
+            <label>Check-out Date:</label>
             <input type="date" name="check_out" class="form-control" required>
         </div>
         <div class="form-group">
-            <label>Số lượng phòng:</label>
+            <label>Number of Rooms:</label>
             <input type="number" name="quantity" class="form-control" value="1" min="1" required>
         </div>
-        <button type="submit" class="btn btn-success">Xác nhận đặt phòng</button>
-        <a href="rooms.php" class="btn btn-secondary">Quay lại</a>
+        <button type="submit" class="btn btn-success">Confirm Booking</button>
+        <a href="rooms.php" class="btn btn-secondary">Back to Rooms</a>
     </form>
 </div>
 </body>
 </html>
 <?php
 } else {
-    // Nếu không có room_id hoặc không phải POST → quay lại danh sách phòng
+    // If there is no room_id or it's not a POST request -> redirect to the room list
     header("Location: rooms.php");
     exit();
 }

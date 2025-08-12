@@ -2,11 +2,11 @@
 session_start();
 ?>
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tất cả các phòng - LuxStay</title>
+    <title>All Rooms - LuxStay</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -17,7 +17,6 @@ session_start();
     </style>
 </head>
 <body class="bg-gray-50">
-    <!-- Header -->
     <header class="bg-white shadow-sm sticky top-0 z-50">
         <div class="container mx-auto px-4 py-4 flex justify-between items-center">
             <div class="flex items-center">
@@ -27,20 +26,20 @@ session_start();
                 </a>
             </div>
             <nav class="hidden md:flex space-x-8">
-                <a href="main.php" class="text-gray-800 hover:text-amber-600 font-medium">Trang chủ</a>
-                <a href="main.php#rooms" class="text-gray-800 hover:text-amber-600 font-medium">Phòng</a>
-                <a href="main.php#amenities" class="text-gray-800 hover:text-amber-600 font-medium">Tiện ích</a>
-                <a href="main.php#about" class="text-gray-800 hover:text-amber-600 font-medium">Giới thiệu</a>
-                <a href="main.php#contact" class="text-gray-800 hover:text-amber-600 font-medium">Liên hệ</a>
+                <a href="main.php" class="text-gray-800 hover:text-amber-600 font-medium">Home</a>
+                <a href="main.php#rooms" class="text-gray-800 hover:text-amber-600 font-medium">Rooms</a>
+                <a href="main.php#amenities" class="text-gray-800 hover:text-amber-600 font-medium">Amenities</a>
+                <a href="main.php#about" class="text-gray-800 hover:text-amber-600 font-medium">About</a>
+                <a href="main.php#contact" class="text-gray-800 hover:text-amber-600 font-medium">Contact</a>
             </nav>
             <div class="flex items-center space-x-4">
                 <?php if(isset($_SESSION['user_id'])): ?>
                     <div class="hidden md:flex items-center space-x-2">
-                        <span class="text-gray-800">Xin chào, <?php echo htmlspecialchars($_SESSION['user_name']); ?></span>
-                        <a href="logout.php" class="px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300 transition">Đăng xuất</a>
+                        <span class="text-gray-800">Hello, <?php echo htmlspecialchars($_SESSION['user_name']); ?></span>
+                        <a href="logout.php" class="px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300 transition">Logout</a>
                     </div>
                 <?php else: ?>
-                    <a href="register/login.html" class="hidden md:block px-4 py-2 bg-amber-600 text-white rounded-md hover:bg-amber-700 transition">Đăng nhập</a>
+                    <a href="register/login.html" class="hidden md:block px-4 py-2 bg-amber-600 text-white rounded-md hover:bg-amber-700 transition">Login</a>
                 <?php endif; ?>
                 <button class="md:hidden text-gray-800 focus:outline-none">
                     <i class="fas fa-bars text-xl"></i>
@@ -49,12 +48,11 @@ session_start();
         </div>
     </header>
 
-    <!-- All Rooms Section -->
     <section class="py-16 bg-gray-50 min-h-screen">
         <div class="container mx-auto px-4">
             <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-gray-800 mb-4">Tất cả các loại phòng</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto">Danh sách đầy đủ các loại phòng tại LuxStay, cập nhật mới nhất từ hệ thống</p>
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">All room types</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">A complete list of all room types at LuxStay, updated from the system</p>
             </div>
             <?php
             include_once "connect.php";
@@ -79,11 +77,11 @@ session_start();
                                 <i class="fas fa-map-marker-alt mr-2 text-amber-500"></i>
                                 <?php echo htmlspecialchars($room['address'] ?? ''); ?>
                             </div>
-                            <span class="text-xs bg-gray-100 px-2 py-1 rounded"><?php echo $room['capacity']; ?> người</span>
+                            <span class="text-xs bg-gray-100 px-2 py-1 rounded"><?php echo $room['capacity']; ?> people</span>
                             <span class="text-xs bg-gray-100 px-2 py-1 rounded"><?php echo $room['size']; ?>m²</span>
                             <?php if($room['has_wifi']): ?><span class="text-xs bg-gray-100 px-2 py-1 rounded">Wifi</span><?php endif; ?>
-                            <?php if($room['has_bathtub']): ?><span class="text-xs bg-gray-100 px-2 py-1 rounded">Bồn tắm</span><?php endif; ?>
-                            <?php if($room['has_balcony']): ?><span class="text-xs bg-gray-100 px-2 py-1 rounded">Ban công</span><?php endif; ?>
+                            <?php if($room['has_bathtub']): ?><span class="text-xs bg-gray-100 px-2 py-1 rounded">Bathtub</span><?php endif; ?>
+                            <?php if($room['has_balcony']): ?><span class="text-xs bg-gray-100 px-2 py-1 rounded">Balcony</span><?php endif; ?>
                         </div>
                         <div class="flex justify-between items-center">
                             <div class="flex text-amber-400">
@@ -93,21 +91,21 @@ session_start();
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
                             </div>
-                            <a href="#" class="text-amber-600 hover:text-amber-700 font-medium flex items-center">Đặt ngay <i class="fas fa-arrow-right ml-2"></i></a>
+                            <a href="#" class="text-amber-600 hover:text-amber-700 font-medium flex items-center">Book now <i class="fas fa-arrow-right ml-2"></i></a>
                         </div>
                     </div>
                 </div>
                 <?php endwhile; ?>
             </div>
             <?php else: ?>
-                <div class="text-center text-gray-500">Hiện chưa có phòng nào trong hệ thống.</div>
+                <div class="text-center text-gray-500">No rooms are currently available in the system.</div>
             <?php endif; ?>
         </div>
     </section>
 
     <footer class="bg-gray-800 text-white py-12 mt-16">
         <div class="container mx-auto px-4 text-center">
-            <p class="text-gray-400">© 2023 LuxStay. Bảo lưu mọi quyền.</p>
+            <p class="text-gray-400">© 2023 LuxStay. All rights reserved.</p>
         </div>
     </footer>
 

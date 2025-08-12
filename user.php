@@ -225,7 +225,7 @@ $result = mysqli_query($conn, "SELECT UserID, FullName, Email, PhoneNumber, Addr
             <input type="text" name="phone" id="phone" placeholder="Số điện thoại">
             <input type="text" name="address" id="address" placeholder="Địa chỉ">
             <input type="password" name="password" id="password" placeholder="Mật khẩu">
-            <button type="submit" name="save_user" class="btn">Lưu</button>
+            <button type="submit" name="save_user" class="btn">Save</button>
         </form>
 
         <table>
@@ -255,7 +255,7 @@ $result = mysqli_query($conn, "SELECT UserID, FullName, Email, PhoneNumber, Addr
                                 '<?= htmlspecialchars($row['PhoneNumber']) ?>',
                                 '<?= htmlspecialchars($row['Address']) ?>'
                             )">Sửa</button>
-                            <a href="?delete=<?= $row['UserID'] ?>" class="btn delete-btn" onclick="return confirm('Bạn có chắc muốn xóa?')">Xóa</a>
+                            <a href="?delete=<?= $row['UserID'] ?>" class="btn delete-btn" onclick="return confirm('Are you sure you want to delete?')">Delete</a>
                         </td>
                     </tr>
                 <?php endwhile; ?>
@@ -263,7 +263,7 @@ $result = mysqli_query($conn, "SELECT UserID, FullName, Email, PhoneNumber, Addr
         </table>
 
         <a href="dashboard.php" class="btn back-btn">Quay lại</a>
-        <a href="admin_rooms.php" class="btn" style="background:#007bff;color:#fff;margin-left:10px;">Quản lý phòng (Admin)</a>
+        <a href="admin_rooms.php" class="btn" style="background:#007bff;color:#fff;margin-left:10px;">Room Management (Admin)</a>
     </div>
 
     <script>
